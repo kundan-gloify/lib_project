@@ -1,0 +1,37 @@
+
+<% name = current_user.present? ? current_user.email : 'Readers' %>
+<h1>Welcome, <%= name %> </h1>
+<p>Please Login/Register to Continue</p>
+</div>
+</div>
+<div class="card-body">
+<% if user_signed_in? %>
+
+<div class="col-md-12 text-center">
+
+<% if current_user.role == 'admin' %>
+
+<%= link_to 'Library', libraries_path, class: "btn btn-primary", :method => "get" %>
+		
+<%= link_to 'Books', books_path, class: "btn btn-secondary", :method => "get" %>
+		
+<%= link_to 'Author', users_path, class: "btn btn-success", :method => "get" %>	
+
+<% else %>
+
+<%= link_to 'Books', books_path, class: "btn btn-secondary", :method => "get" %>
+
+<% end %>
+
+
+
+</div>
+
+<% end %>
+</div>
+
+
+
+
+
+

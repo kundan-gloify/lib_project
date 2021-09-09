@@ -1,0 +1,24 @@
+
+<table class="table table-striped">
+ <thead>
+    <tr>
+      
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date of Birth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i=1 %>
+    <tr>
+    <td><%= i %></td>
+    <td><%= @user.name %></td>
+    <td><%= @user.email %></td>
+    <td><%= @user.date_of_birth %></td>
+	</tr>
+  
+</table>
+
+
+<div style="text-align:center"><%= link_to "Back", users_path, class: "btn btn-primary" %></div>

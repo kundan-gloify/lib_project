@@ -1,0 +1,52 @@
+
+<h3>Add a Book</h3></br></hr>
+
+
+<%= form_for @book do |form| %>
+
+ <% if @book.errors.any? %>
+ <div id="error_explanation"> 
+ <ul>
+ <% @book.errors.each do |error| %>
+ <li><%= error.full_message %></li>
+ <% end %>
+ </ul>
+ </div>
+ <% end %>
+
+  <div class="field">
+ <%= form.label :Title %>
+ </div>
+  <div class="field">
+ <%= form.text_field :title, :class=>"form-control col-md-2" %>
+ </div>
+
+  <div class="field">
+    <%= form.label :PublishedDate %>
+  </div>
+  <div class="field">
+    <%= form.date_field :published_at, :class=>"form-control col-md-2" %>
+  </div>
+
+  <div class="field">
+ <%= form.label :Language %>
+ </div>
+  <div class="field">
+ <%= form.text_field :language, :class=>"form-control col-md-2" %>
+ </div>
+
+ <div class="field">
+ <%= form.label :Author %>
+ </div>
+  <div class="field">
+ <%= form.select :user_id,
+      options_from_collection_for_select(User.where(role: :author), :id, :name), {:prompt => "Select Author"}, :class=>"form-control col-md-2" %>
+ </div>
+ <br>
+
+  
+  <%= form.submit %>
+<% end %>
+<br>
+<div style="text-align:center"><%= link_to "Back", books_path, class: "btn btn-primary" %></div>
+

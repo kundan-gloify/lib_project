@@ -1,0 +1,36 @@
+<h3>List of Libraries</h3></br></hr>
+
+<div style="text-align:left;width: 50%;float: left;"><%= link_to "Home", root_path, class: "btn btn-primary" %></div>
+<div style="text-align:right;width: 50%;float: right;"><%= link_to "Create Library", new_library_path, class: "btn btn-primary" %></div>
+
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Opening Time</th>
+      <th scope="col">Closing Time</th>
+      <th scope="col">Books Count</th>
+      <th scope="col" colspan="3">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i=1 %>
+  	<% @libraries.each do |libraries| %>
+  	<tr>
+    <th><%= i %></th>
+    <td><%= link_to libraries.name, library_path(libraries) %></td>
+    <td><%= libraries.opening_time %></td>
+    <td><%= libraries.closing_time %></td>
+    <td><%= libraries.books_count %></td>
+    <td><%= button_to 'Show', library_path(libraries), class: "btn btn-primary", method: 'get'%></td>
+    <td><%= button_to 'Edit', edit_library_path(libraries), class: "btn btn-success", method: 'get'%></td>
+    <td><%= button_to 'Delete', library_path(libraries), class: "btn btn-danger", method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+  <% i+=1 %>
+  <% end %>
+    
+</table>
+
+
+

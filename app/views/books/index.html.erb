@@ -1,0 +1,56 @@
+<h3>List of Books</h3></br></hr>
+
+
+
+<div style="text-align:left;width: 50%;float: left;"><%= link_to "Home", root_path, class: "btn btn-primary" %></div>
+<% if current_user.role == 'admin' %>
+<div style="text-align:right;width: 50%;float: right;"><%= link_to "Add Book", new_book_path, class: "btn btn-primary" %></div>
+
+<% end %>
+
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Published Date</th>
+      <th scope="col">Language</th>
+      <% if current_user.role != 'admin' %>
+
+      <th scope="col">Library Name</th>
+
+      <% end %>
+
+      <% if current_user.role == 'admin' %>
+
+      <th scope="col">Author Name</th>
+      <th scope="col" colspan="3">Action</th>
+
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  	<% i=1 %>
+  	<% @books.each do |books| %>
+  	<tr>
+    <th><%= i %></th>
+    <td><%= link_to books.title, book_path(books) %></td>
+    <td><%= books.published_at %></td>
+    <td><%= books.language %></td>
+      <% if current_user.role != 'admin' %>
+
+    <td><%= books.library_name %></td>
+
+    <% end %>
+    <% if current_user.role == 'admin' %>
+    <td><%= books.name %></td>
+    <td><%= button_to 'Show', book_path(books), class: "btn btn-primary", method: 'get'%></td>
+    <td><%= button_to 'Edit', edit_book_path(books), class: "btn btn-success", method: 'get'%></td>
+    <td><%= button_to 'Delete', book_path(books), class: "btn btn-danger", method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+	</tr>
+	<% i+=1 %>
+  <% end %>
+    
+</table>
+

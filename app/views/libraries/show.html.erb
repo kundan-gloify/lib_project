@@ -1,0 +1,67 @@
+
+<h3><%= @library_name.name%></h3></br></hr>
+<div style="text-align:left;width: 50%;float: left;"><%= link_to "Home", root_path, class: "btn btn-primary" %></div>
+<div style="text-align:right;width: 50%;float: right;"><%= link_to "Back", libraries_path, class: "btn btn-primary" %></div>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Publication Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i=1 %>
+    <% @library.each do |library| %>
+  	<tr>
+    <td><%= i %></td>
+    <td><%= library.title %></td>
+    <td><%= library.name %></td>
+    <td><%= library.published_at %></td>
+  
+    <td>
+
+
+      <%= form_for '/books/'"#{ library.id }", method: :patch do |form| %>
+      <%= hidden_field(:book, :library_id, :value => '') %>
+      <%= hidden_field(:book, :library_hidden_id, :value => @library_name.id ) %>
+      <%= hidden_field(:book, :user_id, :value => library.user_id ) %>
+
+      <%= form.submit "Remove Book", :class => "btn btn-primary", data: { confirm: 'Are you sure to remove the book from this library?' } %>
+      <% end %>
+
+     </td>
+	</tr>
+  </tbody>
+  <% i+=1 %>
+   
+   <tr>
+    <% end %> 
+    <% @count.each do |count| %>
+     <td colspan="5">Total Books: <%= count.books_count %></td>
+   <% end %>    
+    </tr>
+   <tr>
+    <th colspan="5">
+      Add Books to this Library
+    </th>
+  </tr>
+  <tr>
+    <td>Choose a book to assign</td>
+    <td>
+      <%= form_tag('/books/id', method: :patch) %>
+      <%= select("book", "book_id", Book.where(library_id: [nil, ""]).collect {|p| [ p.title, p.id ] }, {:prompt => "-Select Book-"}, :class => 'form-control') %>
+      <%= hidden_field(:book, :library_id, :value => @library_name.id) %>
+      <%= hidden_field(:book, :library_hidden_id, :value => @library_name.id) %>
+    </td>
+    <td><input type="submit" name="commit" value="Assign Book" data-disable-with="Update Book" class="btn btn-success"></td>
+   
+  
+  </tr>
+  
+</table>

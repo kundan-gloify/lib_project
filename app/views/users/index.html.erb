@@ -1,0 +1,37 @@
+<h3>List of Authors</h3><hr/>
+
+<!-- <div style="text-align:right"><%= button_to "Create Library", new_library_path, class: "btn btn-primary" %></div> -->
+
+<div style="text-align:left;width: 50%;float: left;"><%= link_to "Home", root_path, class: "btn btn-primary" %></div>
+<div style="text-align:right;width: 50%;float: right;"><%= link_to "Back", root_path, class: "btn btn-primary" %></div>
+
+<table class="table table-striped">
+ <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Books Count</th>
+      <th scope="col">Role</th>
+
+      <th scope="col" colspan="3">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i=1 %>
+  	<% @users.each do |users| %>
+  	<tr>
+    <th><%= i %></th>
+    <td><%= link_to users.name, user_path(users) %></td>
+    <td><%= users.email %></td>
+    <td><%= users.date_of_birth %></td>
+    <td><%= users.books_count %></td>
+    <td><%= users.role%></td>
+    <td><%= button_to 'Show', user_path(users), class: "btn btn-primary", method: 'get'%></td>
+    <td><%= button_to 'Edit', edit_user_path(users), class: "btn btn-success", method: 'get'%></td>   <td><%= button_to 'Delete', user_path(users), class: "btn btn-danger", method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+  <% i+=1 %>
+  <% end %>
+    
+</table>
