@@ -13,20 +13,23 @@
  </ul>
  </div>
  <% end %>
- 
- <div class="field">
+ <div class="row">
+ <div class="col-6 offset-3">
+ <div class="form-group">
  <%= form.label :Name %>
- <%= form.text_field :name %>
+ <%= form.text_field :name, class:"form-control" %>
+ </div>
+ </div>
  </div>
 
-  <div class="field">
+ <div class="form-group ">
  <%= form.label :OpeningTime %>
- <%= form.time_select :opening_time %>
+ <%= form.time_select :opening_time,class:"form-control"  %>
  </div>
 
-  <div class="field">
+ <div class="form-group">
  <%= form.label :ClosingTime %>
- <%= form.time_select :closing_time %>
+ <%= form.time_select :closing_time,class:"form-control"  %>
  </div>
 
   <%= form.submit %>

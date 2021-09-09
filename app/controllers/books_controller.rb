@@ -19,7 +19,7 @@ class BooksController < ApplicationController
 
     @book = Book.left_joins(:user).select('books.id, books.title, books.published_at, books.language, users.name').where("books.id = #{ params[:id] }")
 
-     @book_name = Book.find(params[:id])
+    @book_name = Book.find(params[:id])
 
      # render json: @book_name
   end

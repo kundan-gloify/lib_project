@@ -1,4 +1,6 @@
 class LibrariesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
 
     @libraries = Library.left_joins(:books).select('libraries.*, COUNT(books.id) as books_count').group('libraries.id')
@@ -62,6 +64,9 @@ class LibrariesController < ApplicationController
   def destroy
 
     @library = Library.find(params[:id])
+
+
+     
     @library.destroy
 
     redirect_to libraries_path, notice: "Library Deleted Successfully"
